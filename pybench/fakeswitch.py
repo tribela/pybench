@@ -31,7 +31,7 @@ class FakeSwitch(object):
     OF_QUEUE_GET_CONFIG_REPLY = 21
 
     def __init__(self, controller, port=6633, dpid=None):
-        if dpid:
+        if dpid is not None:
             self.dpid = dpid
         else:
             self.dpid = random.randrange(1 << 64)
