@@ -135,6 +135,7 @@ class FakeSwitch(object):
         self.send_packet(self.OF_ECHO_REQUEST, payload=data)
 
     def send_features_reply(self, tid, params):
+        logging.debug('Features reply')
         payload_format = '!QIBxxxII'
 
         buffer_size = 255
@@ -164,6 +165,7 @@ class FakeSwitch(object):
         self.config['miss_send_len'] = miss_send_len
 
     def send_stats_reply(self, tid, payload):
+        logging.debug('send stats reply')
         payload_format = '!HH256s256s256s32s256s'
 
         stats_type = 0
