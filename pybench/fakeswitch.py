@@ -69,7 +69,6 @@ class FakeSwitch(object):
 
     def register(self):
         self.connect()
-        self.send_hello()
         while not self.registered:
             self.proc_step()
 
@@ -101,6 +100,7 @@ class FakeSwitch(object):
 
         if type_ == self.OF_HELLO:
             logging.debug('HELLO!')
+            self.send_hello()
         elif type_ == self.OF_ECHO_REPLY:
             logging.debug('Echo reply: {0}'.format(payload))
         elif type_ == self.OF_FEATURES_REQUEST:
