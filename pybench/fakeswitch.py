@@ -72,7 +72,7 @@ class FakeSwitch(object):
         while not self.registered:
             self.proc_step()
 
-    def send_packet(self, of_type, tid=0, payload=''):
+    def send_packet(self, of_type, tid=0, payload=b''):
         version = 1
         tid = 0
 
@@ -170,11 +170,11 @@ class FakeSwitch(object):
 
         stats_type = 0
         flags = 0x00000000
-        mfr_desc = 'SDN Jammer'
-        hw_desc = 'FakeSwitch'
-        sw_desc = '0.0.0'
-        serial_num = 'None'
-        dp_desc = 'None'
+        mfr_desc = b'SDN Jammer'
+        hw_desc = b'FakeSwitch'
+        sw_desc = b'0.0.0'
+        serial_num = b'None'
+        dp_desc = b'None'
 
         payload = struct.pack(
             payload_format, stats_type, flags,
