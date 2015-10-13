@@ -15,23 +15,23 @@ class FakeSwitch(object):
     OF_ECHO_REQUEST = 2
     OF_ECHO_REPLY = 3
     OF_EXPERIMENTER = 4
-    OF_FEATUERS_REQUEST = 5
+    OF_FEATURES_REQUEST = 5
     OF_FEATURES_REPLY = 6
     OF_GET_CONFIG_REQUEST = 7
     OF_GET_CONFIG_REPLY = 8
-    OF_SET_CONFIG = 9,
-    OF_PACKET_IN = 10,
-    OF_FLOW_REMOVED = 11,
-    OF_PORT_STATUS = 12,
-    OF_PACKET_OUT = 13,
-    OF_FLOW_MOD = 14,
-    OF_PORT_MOD = 15,
-    OF_STATS_REQUEST = 16,
-    OF_STATS_REPLY = 17,
-    OF_BARRIER_REQUEST = 18,
-    OF_BARRIER_REPLY = 19,
-    OF_QUEUE_GET_CONFIG_REQUEST = 20,
-    OF_QUEUE_GET_CONFIG_REPLY = 21,
+    OF_SET_CONFIG = 9
+    OF_PACKET_IN = 10
+    OF_FLOW_REMOVED = 11
+    OF_PORT_STATUS = 12
+    OF_PACKET_OUT = 13
+    OF_FLOW_MOD = 14
+    OF_PORT_MOD = 15
+    OF_STATS_REQUEST = 16
+    OF_STATS_REPLY = 17
+    OF_BARRIER_REQUEST = 18
+    OF_BARRIER_REPLY = 19
+    OF_QUEUE_GET_CONFIG_REQUEST = 20
+    OF_QUEUE_GET_CONFIG_REPLY = 21
 
     def __init__(self, controller, port=6633, dpid=None):
         if dpid:
@@ -106,7 +106,7 @@ class FakeSwitch(object):
             logging.debug('HELLO!')
         elif type_ == self.OF_ECHO_REPLY:
             logging.debug('Echo reply: {0}'.format(payload))
-        elif type_ == self.OF_FEATUERS_REQUEST:
+        elif type_ == self.OF_FEATURES_REQUEST:
             logging.debug('Feature request')
             self.send_features_reply(tid, payload)
         elif type_ == self.OF_GET_CONFIG_REQUEST:
