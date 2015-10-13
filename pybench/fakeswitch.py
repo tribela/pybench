@@ -45,6 +45,8 @@ class FakeSwitch(object):
         self.connected = False
         self.registered = False
 
+        self.packet_count = 0
+
         self.config = {
             'flags': 0x00000000,
             'miss_send_len': 128,
@@ -59,6 +61,9 @@ class FakeSwitch(object):
         self.sock.close()
         self.connected = False
         self.registered = False
+
+    def get_packet_count(self):
+        return self.packet_count
 
     def start(self):
         self.register()
@@ -110,6 +115,12 @@ class FakeSwitch(object):
         elif type_ == self.OF_SET_CONFIG:
             logging.debug('Setting config')
             self.set_config(payload)
+        elif type_ == self.OF_PACKET_OUT:
+            logging.debug('Packet out')
+            self.packet_count += 1
+        elif type_ == self.OF_FLOW_MOD:
+            logging.debug('Flow mod')
+            self.packet_count += 1
         elif type_ == self.OF_STATS_REQUEST:
             logging.debug('Stats request')
             self.send_stats_reply(tid, payload)
