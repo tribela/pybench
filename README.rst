@@ -1,4 +1,4 @@
 Pybench
 =======
 
-OpenFlow benchmarking tool that written in Python.
+OpenFlow benchmarking tool that is written in Python.
