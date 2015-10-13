@@ -1,5 +1,4 @@
-SDN jammer
-==========
+Pybench
+=======
 
-This pentest tool will jamming SDN controller.
-
+OpenFlow benchmarking tool that written in Python.
