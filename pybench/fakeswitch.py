@@ -2,9 +2,6 @@ import logging
 import random
 import socket
 import struct
-import threading
-import time
-
 
 class FakeSwitch(object):
     HEADER_FORMAT = '!BBHI'
