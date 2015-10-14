@@ -3,9 +3,7 @@ import time
 from pybench.fakeswitch import FakeSwitch
 
 
-def benchmark_switch(host, port, dpid, queue, duration):
-    switch = FakeSwitch(host, port, dpid=dpid)
-    switch.register()
+def benchmark_switch(switch, queue, duration):
     end_time = time.time() + duration
     while time.time() < end_time:
         switch.send_packet_in()
@@ -17,9 +15,14 @@ def benchmark_switch(host, port, dpid, queue, duration):
 
 def benchmark(host, port, num_of_switches, duration):
     queue = multiprocessing.Queue()
+    switches = [FakeSwitch(host, port, dpid)
+                for dpid in range(num_of_switches)]
     processes = [multiprocessing.Process(
-        target=benchmark_switch, args=(host, port, dpid, queue, duration))
-        for dpid in range(num_of_switches)]
+        target=benchmark_switch, args=(switch, queue, duration))
+        for switch in switches]
+
+    for switch in switches:
+        switch.register()
 
     for process in processes:
         process.start()
