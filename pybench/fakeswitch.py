@@ -3,6 +3,8 @@ import random
 import socket
 import struct
 
+from scapy.layers.all import Ether, IP
+
 class FakeSwitch(object):
     HEADER_FORMAT = '!BBHI'
     HEADER_SIZE = struct.calcsize(HEADER_FORMAT)
@@ -183,36 +185,28 @@ class FakeSwitch(object):
         self.send_packet(self.OF_STATS_REPLY, tid, payload)
         self.registered = True
 
-    def send_packet_in(self):
-        payload_format = '!LIBBQIIIBILI'
+    def send_packet_in(self, srcmac, dstmac, srcip=None, dstip=None):
+        ethernet_frame = (Ether(src=srcmac, dst=dstmac) /
+                          IP(src=srcip, dst=dstip)
+                         ).build()
+
+        payload_format = '!LHHBx'
 
         buffer_id = 0xffffffff
-        total_len = 0x0000
+        total_len = len(ethernet_frame)
+        in_port = 0x0000
         reason = 0x00 # No match
-        table_id = 0x00
-        cookie = 0x0000000000000000
-        match_type = 0x0001
-        match_length = 0x000c
-        oxm_class = 0x8000
-        oxm_length = 0x04
-        oxm_value = 0x0002
-        pad1 = 0x00000000
-        pad2 = 0x0000
+
 
         payload = struct.pack(
             payload_format,
             buffer_id,
             total_len,
+            in_port,
             reason,
-            table_id,
-            cookie,
-            match_type,
-            match_length,
-            oxm_class,
-            oxm_length,
-            oxm_value,
-            pad1, pad2,
         )
+
+        payload += ethernet_frame
 
         self.send_packet(self.OF_PACKET_IN, 0, payload=payload)
 
