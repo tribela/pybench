@@ -30,4 +30,9 @@ setup(
     py_modules=['pybench'],
     zip_safe=False,
     install_requires=install_requires,
+    entry_points={
+        'console_scripts': [
+            'pybench=pybench.__main__:main'
+        ]
+    }
 )
