@@ -12,9 +12,10 @@ arg_parser.add_argument('-n', '--switch-num', type=int, default=1,
 arg_parser.add_argument('-t', '--duration', type=int, default=10,
                         help='Test duration')
 arg_parser.add_argument('-d', '--dstip', nargs=2,
-                        help='Destination ips')
+                        help='Destination ip addresses in CIDR format')
 arg_parser.add_argument('-r', '--ratio', type=int, default=50,
                         help='dst1:all ratio in percentage')
+
 
 def main():
     args = arg_parser.parse_args()

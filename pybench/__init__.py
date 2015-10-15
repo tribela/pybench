@@ -15,14 +15,14 @@ def benchmark_switch(switch, queue, duration, dst1, dst2, ratio):
     while time.time() < end_time:
         ratio_order += ratio
         if ratio_order >= 1:
-            dstip = dst1
+            dstip = make_random_ip(dst1)
             ratio_order %= 1
         else:
-            dstip = dst2
+            dstip = make_random_ip(dst2)
 
         switch.send_packet_in(
             srcmac=make_random_mac(), dstmac=dstmac,
-            srcip=make_random_ip(), dstip=dstip)
+            srcip=make_random_ip(dst1), dstip=dstip)
         switch.proc_step()
 
     switch.close()
