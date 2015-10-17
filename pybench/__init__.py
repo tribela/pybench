@@ -54,4 +54,6 @@ def benchmark(host, port, num_of_switches, duration, dst1, dst2, ratio):
     for index, item in enumerate(items):
         print('{}: {}'.format(index, item))
 
-    print('Total: {}'.format(sum(items)))
+    total_responses = sum(items)
+    print('Total: {}, {}/s'.format(
+        total_responses, total_responses / duration))
