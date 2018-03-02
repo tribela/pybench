@@ -10,6 +10,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 version = '0.0.0'
 
 install_requires = [
+    'netaddr>=0.7.19',
 ]
 
 if sys.version_info >= (3,):
