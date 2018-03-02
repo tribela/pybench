@@ -13,7 +13,7 @@ install_requires = [
 ]
 
 if sys.version_info >= (3,):
-    install_requires.append('scapy-python3>=2.3.1')
+    install_requires.append('scapy-python3>=0.23')
 else:
     install_requires.append('scapy>=2.3.1')
 
